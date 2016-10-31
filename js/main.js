@@ -1,17 +1,23 @@
 var target = document.getElementById("target");
+var localTime = Math.floor(Date.now()/1000);
 var currentLatitude;
 var currentLongitude;
 var rawTemp;
 var fahrenheitTemp;
 var celsiusTemp;
 var weatherDescription;
+var weatherCode;
+var sunsetTime;
 var locationName;
+var countryCode;
+var dayorNight;
 
 function updateLocation(position) {
 	currentLatitude = position.coords.latitude;
 	currentLongitude = position.coords.longitude;
 	console.log("Lat = " + currentLatitude);
 	console.log("Long = " + currentLongitude);
+	console.log(localTime);
 	getWeather();
 }
 
@@ -23,8 +29,17 @@ function getWeather() {
 		fahrenheitTemp = (1.8 * (rawTemp - 273)) + 32;
 		celsiusTemp = rawTemp - 273.15;
 		weatherDescription = data.weather[0].description;
+		weatherCode = data.weather[0].id;
+		sunsetTime = data.sys.sunset;
 		locationName = data.name;
-		console.log(rawTemp, fahrenheitTemp, celsiusTemp, weatherDescription, locationName);
+		countryCode = data.sys.country;
+		console.log(rawTemp, fahrenheitTemp, celsiusTemp, weatherDescription, weatherCode, sunsetTime, locationName, countryCode);
+		if(localTime > sunsetTime) {
+			dayorNight = "night";
+		} else {
+			dayorNight = "day";
+		}
+		console.log('It is currently ' + dayorNight + "time.");
 	});
 }
 
