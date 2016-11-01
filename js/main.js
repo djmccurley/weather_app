@@ -1,5 +1,4 @@
-var target = document.getElementById("target");
-var localTime = Math.floor(Date.now()/1000);
+var localTime = new Date().getHours();
 var currentLatitude;
 var currentLongitude;
 var rawTemp;
@@ -7,7 +6,7 @@ var fahrenheitTemp;
 var celsiusTemp;
 var weatherDescription;
 var weatherCode;
-var sunsetTime;
+//var sunsetTime;
 var locationName;
 var countryCode;
 var dayorNight;
@@ -30,22 +29,27 @@ function getWeather() {
 		celsiusTemp = rawTemp - 273.15;
 		weatherDescription = data.weather[0].description;
 		weatherCode = data.weather[0].id;
-		sunsetTime = data.sys.sunset;
+		//sunsetTime = data.sys.sunset;
 		locationName = data.name;
 		countryCode = data.sys.country;
-		console.log(rawTemp, fahrenheitTemp, celsiusTemp, weatherDescription, weatherCode, sunsetTime, locationName, countryCode);
-		if(localTime > sunsetTime) {
+		console.log(rawTemp, fahrenheitTemp, celsiusTemp, weatherDescription, weatherCode, locationName, countryCode);
+		if(localTime <= 7 || localTime >= 20) {
 			dayorNight = "night";
 		} else {
 			dayorNight = "day";
 		}
 		console.log('It is currently ' + dayorNight + "time.");
+
 	});
 }
 
-if (navigator.geolocation) {
-	navigator.geolocation.getCurrentPosition(updateLocation);
-} else {
-		target.innerHTML = "<p>Geolocation is not supported by this browser.</p>";
-}
+
+
+$(document).ready(function () {
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(updateLocation);
+	} else {
+			target.innerHTML = "<p>Geolocation is not supported by this browser.</p>";
+	}
+});
 
