@@ -1,16 +1,3 @@
-var localTime = new Date().getHours();
-var currentLatitude;
-var currentLongitude;
-var rawTemp;
-var fahrenheitTemp;
-var celsiusTemp;
-var weatherDescription;
-var weatherCode;
-//var sunsetTime;
-var locationName;
-var countryCode;
-var dayOrNight;
-//must access weatherCodeIcons values with object[value] notation
 var dayIcons = {
 	200: "day-thunderstorm",
 	201: "day-thunderstorm",
@@ -72,7 +59,7 @@ var dayIcons = {
 	957: "strong-wind",
 };
 
-var nightIcons = {	
+var nightIcons {	
 	200: "night-alt-thunderstorm",
 	201: "night-alt-thunderstorm",
 	202: "night-alt-thunderstorm",
@@ -132,59 +119,3 @@ var nightIcons = {
 	906: "night-alt-hail",
 	957: "strong-wind"
 };	
-
-function updateLocation(position) {
-	currentLatitude = position.coords.latitude;
-	currentLongitude = position.coords.longitude;
-	console.log("Lat = " + currentLatitude);
-	console.log("Long = " + currentLongitude);
-	console.log(localTime);
-	getWeather();
-}
-
-function getWeather() {
-	console.log("getWeather running");
-	$.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + currentLatitude + "&lon=" + currentLongitude + "&APPID=a001db6b0e2e052f5af44a88b34090b7", function(data) {
-		console.log(data);
-		rawTemp = data.main.temp;
-		fahrenheitTemp = Math.floor((1.8 * (rawTemp - 273)) + 32);
-		celsiusTemp = Math.floor(rawTemp - 273.15);
-		weatherDescription = data.weather[0].description;
-		weatherCode = data.weather[0].id;
-		//sunsetTime = data.sys.sunset;
-		locationName = data.name;
-		countryCode = data.sys.country;
-		console.log(rawTemp, fahrenheitTemp, celsiusTemp, weatherDescription, weatherCode, locationName, countryCode);
-		if(localTime <= 7 || localTime >= 20) {
-			dayOrNight = "night";
-		} else {
-			dayOrNight = "day";
-		}
-		console.log('It is currently ' + dayOrNight + "time.");
-		updateDisplay();
-	});
-}
-
-function updateDisplay() {
-	//removes visuallyhidden class to show app data all at once
-	document.getElementById("app_wrapper").className = "";
-	//updates text displays
-	document.getElementById("temp_display").innerHTML = fahrenheitTemp;
-	document.getElementById("loc_display").innerHTML = locationName + ", " + countryCode;
-	//updates icon based on weather and day or night
-	if(dayOrNight = "night") {
-		document.getElementById("icon_holder").innerHTML = "<i class=\"wi wi-" + nightIcons[weatherCode] + "\"></i>";
-	} else if(dayOrNight = "day") {
-			document.getElementById("icon_holder").innerHTML = "<i class=\"wi wi-" + dayIcons[weatherCode] + "\"></i>";
-	}
-	
-}
-
-$(document).ready(function () {
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(updateLocation);
-	} else {
-			target.innerHTML = "<p>Geolocation is not supported by this browser.</p>";
-	}
-});
-
