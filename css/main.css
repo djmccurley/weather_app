@@ -95,9 +95,44 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    height: 100vh;
+}
 
+* {
+    border: solid 1px black;
+}
 
+h2 {
+    text-align: right;
+    font-weight: 400;
+}
+
+#temp_display {
+    font-size: 5rem;
+    padding-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+#loc_display {
+    font-size: 1.5rem;
+    padding-right: 3.2rem;
+}
+
+#icon_holder {
+    font-size: 8rem;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
 
 
 

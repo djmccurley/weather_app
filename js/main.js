@@ -172,9 +172,9 @@ function updateDisplay() {
 	document.getElementById("temp_display").innerHTML = fahrenheitTemp + "&#176";
 	document.getElementById("loc_display").innerHTML = locationName + ", " + countryCode;
 	//updates icon based on weather and day or night
-	if(dayOrNight = "night") {
+	if(dayOrNight === "night") {
 		document.getElementById("icon_holder").innerHTML = "<i class=\"wi wi-" + nightIcons[weatherCode] + "\"></i>";
-	} else if(dayOrNight = "day") {
+	} else if(dayOrNight === "day") {
 			document.getElementById("icon_holder").innerHTML = "<i class=\"wi wi-" + dayIcons[weatherCode] + "\"></i>";
 	}
 	
