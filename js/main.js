@@ -169,7 +169,7 @@ function updateDisplay() {
 	//removes visuallyhidden class to show app data all at once
 	document.getElementById("app_wrapper").className = "";
 	//updates text displays
-	document.getElementById("temp_display").innerHTML = fahrenheitTemp;
+	document.getElementById("temp_display").innerHTML = fahrenheitTemp + "&#176";
 	document.getElementById("loc_display").innerHTML = locationName + ", " + countryCode;
 	//updates icon based on weather and day or night
 	if(dayOrNight = "night") {
