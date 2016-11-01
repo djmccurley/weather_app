@@ -110,6 +110,8 @@ function getWeather() {
 function updateDisplay() {
 	document.getElementById("app_wrapper").className = "";
 	document.getElementById("temp_display").innerHTML = fahrenheitTemp;
+	document.getElementById("icon_holder").innerHTML = "<i class=\"wi wi-" + weatherCodeIcons[weatherCode] + "\"></i>";
+	// <i class="wi wi-sprinkle"></i>
 	document.getElementById("loc_display").innerHTML = locationName + ", " + countryCode;
 }
 
