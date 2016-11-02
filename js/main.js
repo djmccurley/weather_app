@@ -135,9 +135,10 @@ var nightIcons = {
 	957: "strong-wind"
 };	
 
-function updateLocation(position) {
-	currentLatitude = position.coords.latitude;
-	currentLongitude = position.coords.longitude;
+function updateLocation(data) {
+	currentLatitude = data.lat;
+	currentLongitude = data.lon;
+	locationName = data.city;
 	console.log("Lat = " + currentLatitude);
 	console.log("Long = " + currentLongitude);
 	console.log(localTime);
@@ -156,7 +157,7 @@ function getWeather() {
 		weatherDescription = data.weather[0].description;
 		weatherCode = data.weather[0].id;
 		//sunsetTime = data.sys.sunset;
-		locationName = data.name;
+		/*locationName = data.name;*/
 		countryCode = data.sys.country;
 		console.log(rawTemp, fahrenheitTemp, celsiusTemp, weatherDescription, weatherCode, locationName, countryCode);
 		if(localTime <= 7 || localTime >= 20) {
@@ -218,12 +219,9 @@ function changeToFahrenheit() {
 }
 
 $(document).ready(function () {
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(updateLocation);
-	} else {
-			target.innerHTML = "<p>Geolocation is not supported by this browser.</p>";
-	}
-
+	$.getJSON("http://ip-api.com/json", function(data){
+		updateLocation(data);
+	});
 	document.getElementById("celsius").addEventListener("click", changeToCelsius);
 	document.getElementById("fahrenheit").addEventListener("click", changeToFahrenheit);
 });
