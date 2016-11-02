@@ -208,11 +208,22 @@ function updateDisplay() {
 	document.getElementById("body").className = colorTemperature;
 }
 
+function changeToCelsius() {
+	document.getElementById("temp_display").innerHTML = celsiusTempDisplay;
+}
+
+function changeToFahrenheit() {
+	document.getElementById("temp_display").innerHTML = fahrenheitTempDisplay;
+}
+
 $(document).ready(function () {
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(updateLocation);
 	} else {
 			target.innerHTML = "<p>Geolocation is not supported by this browser.</p>";
 	}
+
+	document.getElementById("celsius").addEventListener("click", changeToCelsius);
+	document.getElementById("fahrenheit").addEventListener("click", changeToFahrenheit);
 });
 

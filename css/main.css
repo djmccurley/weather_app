@@ -157,9 +157,9 @@ h2 {
 }
 
 #temp_display {
-    font-size: 20vh;
+    font-size: 18vh;
     line-height: 0;
-    margin-bottom: 20vh;
+    margin-bottom: 18vh;
 }
 
 #loc_display {
@@ -167,15 +167,27 @@ h2 {
 }
 
 #icon_holder {
-    font-size: 20vh;
+    font-size: 18vh;
     text-align: center;
-    margin-bottom: 10vh;
+    margin-bottom: 8vh;
 }
 
 .info {
     opacity: .45;
-    display: inline-block;
+    font-size: 1.1rem;
 }
+
+a.info:link, a.info:visited {
+    color: inherit;
+    transition: .2s ease all;
+    padding: 1em;
+}
+
+a.info:hover, a.info:active a.info:focus {
+    opacity: 1;
+    transition: .2s ease all;
+}
+
 
 
 
