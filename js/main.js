@@ -170,6 +170,7 @@ function getWeather() {
 }
 
 function updateDisplay() {
+	document.getElementById("loading_screen").className = "visuallyhidden";
 	//removes visuallyhidden class to show app data all at once
 	document.getElementById("app_wrapper").className = "";
 	//updates text displays
