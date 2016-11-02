@@ -104,36 +104,82 @@ html {
 
 body {
     font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
-    height: 100vh;
+    text-align: center;
 }
 
-* {
-    border: solid 1px black;
+body.night_cold {
+    background-color: #283470;
+    color: #15a29c;
 }
+
+body.night_cool {
+    background-color: #3c475d;
+    color: #e9e8d4;
+}
+
+body.night_warm {
+    background-color: #131837;
+    color: #CF7C79;
+}
+
+body.night_hot {
+    background-color: #010506;
+    color: #FCB82D;
+}
+
+body.day_cold {
+    background-color: #81E0E5;
+    color: #FC3293;
+}
+
+body.day_cool {
+    background-color: #C06B6B;
+    color: #1D0743;
+}
+
+body.day_warm {
+    background-color: #2BAC67;
+    color: #FDC8BF;
+}
+
+body.day_hot {
+    background-color: #FED030;
+    color: #EE25EC;
+}
+
+/** {
+    border: solid 1px black;
+}*/
 
 h2 {
-    text-align: right;
+    text-align: center;
     font-weight: 400;
 }
 
 #temp_display {
-    font-size: 5rem;
-    padding-right: 1rem;
-    margin-bottom: 1rem;
+    font-size: 20vh;
+    line-height: 0;
+    margin-bottom: 20vh;
 }
 
 #loc_display {
-    font-size: 1.5rem;
-    padding-right: 3.2rem;
+    font-size: 8vh;
 }
 
 #icon_holder {
-    font-size: 8rem;
-    padding-left: 2rem;
-    margin-bottom: 2rem;
+    font-size: 20vh;
+    text-align: center;
+    margin-bottom: 10vh;
 }
 
+.info {
+    opacity: .45;
+    display: inline-block;
+}
+
+.temp_scale:hover {
+    cursor: pointer;
+}
 
 
 

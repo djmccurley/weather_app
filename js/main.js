@@ -147,8 +147,8 @@ function getWeather() {
 	$.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + currentLatitude + "&lon=" + currentLongitude + "&APPID=a001db6b0e2e052f5af44a88b34090b7", function(data) {
 		console.log(data);
 		rawTemp = data.main.temp;
-		fahrenheitTemp = Math.floor((1.8 * (rawTemp - 273)) + 32);
-		celsiusTemp = Math.floor(rawTemp - 273.15);
+		fahrenheitTemp = Math.floor((1.8 * (rawTemp - 273)) + 32) + "&#176 <span class=\"temp_scale\">F</span>";
+		celsiusTemp = Math.floor(rawTemp - 273.15) + "&#176 C";
 		weatherDescription = data.weather[0].description;
 		weatherCode = data.weather[0].id;
 		//sunsetTime = data.sys.sunset;
@@ -169,15 +169,39 @@ function updateDisplay() {
 	//removes visuallyhidden class to show app data all at once
 	document.getElementById("app_wrapper").className = "";
 	//updates text displays
-	document.getElementById("temp_display").innerHTML = fahrenheitTemp + "&#176";
+	document.getElementById("temp_display").innerHTML = fahrenheitTemp;
 	document.getElementById("loc_display").innerHTML = locationName + ", " + countryCode;
-	//updates icon based on weather and day or night
+	/* 	updates icon based on weather and day or night
+			sets color palette based on temp and day/night 	*/
+	var colorTemperature;
 	if(dayOrNight === "night") {
 		document.getElementById("icon_holder").innerHTML = "<i class=\"wi wi-" + nightIcons[weatherCode] + "\"></i>";
+		switch(fahrenheitTemp) {
+			case fahrenheitTemp<35: colorTemperature = "night_cold";
+			break; 
+			case fahrenheitTemp<60: colorTemperature = "night_cool";
+			break; 
+			case fahrenheitTemp<80: colorTemperature = "night_warm";
+			break; 
+			case fahrenheitTemp>=80: colorTemperature = "night_hot";
+			break; 
+			default: colorTemperature = "night_cool";
+		}
 	} else if(dayOrNight === "day") {
 			document.getElementById("icon_holder").innerHTML = "<i class=\"wi wi-" + dayIcons[weatherCode] + "\"></i>";
+			switch(fahrenheitTemp) {
+				case fahrenheitTemp<35: colorTemperature = "day_cold";
+					break; 
+				case fahrenheitTemp<60: colorTemperature = "day_cool";
+					break; 
+				case fahrenheitTemp<80: colorTemperature = "day_warm";
+					break; 
+				case fahrenheitTemp>=80: colorTemperature = "day_hot";
+					break; 
+				default: colorTemperature = "day_hot";
+		}
 	}
-	
+	document.getElementById("body").className = colorTemperature;
 }
 
 $(document).ready(function () {
