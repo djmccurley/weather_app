@@ -157,11 +157,14 @@ body.day_hot {
     font-size: 10vw;
 }
 
+
 h2 {
     text-align: center;
     font-weight: 400;
 }
-
+#app_wrapper {
+    padding-bottom: 4rem;
+}
 #temp_display {
     font-size: 18vh;
     line-height: 0;
@@ -181,10 +184,7 @@ h2 {
 .info {
     opacity: .65;
     font-size: 1rem;
-}
-
-.about {
-    opacity: .45;
+    line-height: 1.8rem;
 }
 
 a:link, a:visited {
@@ -198,9 +198,9 @@ a:hover, a:active, a:focus {
 }
 
 a.temp_change {
-    line-height: 3rem;
     padding: 0 1rem;
 }
+
 
 
 
