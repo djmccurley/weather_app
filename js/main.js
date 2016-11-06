@@ -12,6 +12,8 @@ var weatherCode;
 var locationName;
 var countryCode;
 var dayOrNight;
+
+//dayIcons and nightIcons: keys = weather codes, values = weather-icons.css icons
 //must access weatherCodeIcons values with object[value] notation
 var dayIcons = {
 	200: "day-thunderstorm",
@@ -135,6 +137,7 @@ var nightIcons = {
 	957: "strong-wind"
 };	
 
+//updateLocation gets data from ip-api JSON response, stores in variables, then launches getWeather
 function updateLocation(data) {
 	currentLatitude = data.lat;
 	currentLongitude = data.lon;
@@ -145,6 +148,8 @@ function updateLocation(data) {
 	getWeather();
 }
 
+//makes AJAX request to openweathermap API and stores relevant returned data
+//also sets day or night for color palettes
 function getWeather() {
 	console.log("getWeather running");
 	$.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + currentLatitude + "&lon=" + currentLongitude + "&APPID=a001db6b0e2e052f5af44a88b34090b7", function(data) {
@@ -159,7 +164,8 @@ function getWeather() {
 		//sunsetTime = data.sys.sunset;
 		/*locationName = data.name;*/
 		countryCode = data.sys.country;
-		console.log(rawTemp, fahrenheitTemp, celsiusTemp, weatherDescription, weatherCode, locationName, countryCode);
+		console.log(	rawTemp, fahrenheitTemp, celsiusTemp, 
+									weatherDescription, weatherCode, locationName, countryCode);
 		if(localTime <= 7 || localTime >= 20) {
 			dayOrNight = "night";
 		} else {
@@ -170,6 +176,7 @@ function getWeather() {
 	});
 }
 
+//upates HTML to display data once available
 function updateDisplay() {
 	document.getElementById("loading_screen").className = "visuallyhidden";
 	//removes visuallyhidden class to show app data all at once
@@ -210,6 +217,7 @@ function updateDisplay() {
 	document.getElementById("body").className = colorTemperature;
 }
 
+//links to change temp display between c/f
 function changeToCelsius() {
 	document.getElementById("temp_display").innerHTML = celsiusTempDisplay;
 }
@@ -218,6 +226,7 @@ function changeToFahrenheit() {
 	document.getElementById("temp_display").innerHTML = fahrenheitTempDisplay;
 }
 
+//launches AJAX request to ip-api.com to determine location
 $(document).ready(function () {
 	$.getJSON("http://ip-api.com/json", function(data){
 		updateLocation(data);
